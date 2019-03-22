@@ -79,7 +79,8 @@ public class userRegisterController {
 		// IP del servicio mail
 		//String urlFinal = "http://192.168.33.11:8080/mail";
 		//String urlFinal = "http://192.168.33.14:8080/mail";
-		String urlFinal = "http://192.168.33.17:80/mail";
+		//String urlFinal = "http://192.168.33.17:80/mail";
+		String urlFinal = "http://172.17.0.3:8080/mail";
 		System.out.println("Enviado a " + nuevo.getName() + " con mail: " + nuevo.getEmail());
 		Mail mail = new Mail(nuevo.getName(), nuevo.getEmail());
 
