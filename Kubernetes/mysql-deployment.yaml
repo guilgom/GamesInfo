@@ -17,7 +17,7 @@ spec:
         component: dbservice
     spec:
       volumes:
-      - name: db-pv
+      - name: db-pv-storage
         persistentVolumeClaim:
           claimName: db-pvc
       containers:
@@ -32,7 +32,7 @@ spec:
         - containerPort: 3306
         volumeMounts:
         - mountPath: "/var/lib/mysql"
-          name: db-pv
+          name: db-pv-storage
 ---
 apiVersion: v1
 kind: Service

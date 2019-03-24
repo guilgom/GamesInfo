@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deploy
+  labels:
+    app: guillermogomez
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: guillermogomez
+      component: webservice
+  template:
+    metadata:
+      labels:
+        app: guillermogomez
+        component: webservice
+    spec:
+      containers:
+      - name: webservice
+        image: noserious/prueba_servidor
+        ports:
+        - containerPort: 8443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-serve
+  labels:
+    app: guillermogomez
+spec:
+  ports:
+  - port: 8443
+    targetPort: 8443
+    protocol: TCP
+    name: web-serve-port
+  selector:
+    component: webservice
+    type: NodePort
