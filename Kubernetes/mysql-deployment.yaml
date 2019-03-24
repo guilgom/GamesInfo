@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deploy
+  labels:
+    app: guillermogomez
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: guillermogomez
+      component: dbservice
+  template:
+    metadata:
+      labels:
+        app: guillermogomez
+        component: dbservice
+    spec:
+      volumes:
+      - name: db-pv
+        persistentVolumeClaim:
+          claimName: db-pvc
+      containers:
+      - name: dbservice
+        image: mysql:5.5.62
+        env:
+        - name: MYSQL_DATABASE
+          value: gamesinfo_db
+        - name: MYSQL_ROOT_PASSWORD
+          value: gugus
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - mountPath: "/var/lib/mysql"
+          name: db-pv
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-serve
+  labels:
+    app: guillermogomez
+spec:
+  ports:
+  - port: 3306
+    targetPort: 3306
+    protocol: TCP
+    name: mysql-serve-port
+  selector:
+    component: dbservice
+    type: NodePort
