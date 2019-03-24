@@ -80,7 +80,9 @@ public class userRegisterController {
 		//String urlFinal = "http://192.168.33.11:8080/mail";
 		//String urlFinal = "http://192.168.33.14:8080/mail";
 		//String urlFinal = "http://192.168.33.17:80/mail";
-		String urlFinal = "http://172.17.0.3:8080/mail";
+		//String urlFinal = "http://172.17.0.3:8080/mail";
+                // NOTE:  This should work in any namespace: mail-serve's FQDN in my Kubernetes cluster is mail-serve.default.svc.cluster.local, which is dependant on namespace 'default'.
+ 		String urlFinal = "http://mail-serve:8080/mail";
 		System.out.println("Enviado a " + nuevo.getName() + " con mail: " + nuevo.getEmail());
 		Mail mail = new Mail(nuevo.getName(), nuevo.getEmail());
 

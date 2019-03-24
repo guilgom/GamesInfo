@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mail-deploy
+  labels:
+    app: guillermogomez
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: guillermogomez
+      component: mailservice
+  template:
+    metadata:
+      labels:
+        app: guillermogomez
+        component: mailservice
+    spec:
+      containers:
+      - name: mailservice
+        image: noserious/mailservice
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mail-serve
+  labels:
+    app: guillermogomez
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: mail-serve-port
+  selector:
+    component: mailservice
+    type: NodePort
