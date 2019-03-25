@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gamesinfo-ingress
+  labels:
+    app: guillermogomez
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+ rules:
+ - host: games.info
+   http:
+     paths:
+     - path: /*
+       backend:
+         serviceName: web-serve
+         servicePort: 8443
