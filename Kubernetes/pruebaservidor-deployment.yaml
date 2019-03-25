@@ -36,4 +36,5 @@ spec:
     name: web-serve-port
   selector:
     component: webservice
-    type: NodePort
+    app: guillermogomez
+  type: NodePort

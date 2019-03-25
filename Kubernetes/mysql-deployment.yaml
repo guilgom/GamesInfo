@@ -47,5 +47,6 @@ spec:
     protocol: TCP
     name: mysql-serve-port
   selector:
+    app: guillermogomez
     component: dbservice
-    type: NodePort
+  type: NodePort

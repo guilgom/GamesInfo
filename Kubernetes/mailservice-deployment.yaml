@@ -35,5 +35,6 @@ spec:
     protocol: TCP
     name: mail-serve-port
   selector:
+    app: guillermogomez
     component: mailservice
-    type: NodePort
+  type: NodePort
